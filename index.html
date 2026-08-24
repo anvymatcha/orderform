@@ -12,6 +12,8 @@
   --ink:#3b271f;
   --muted:#776b5f;
   --line:#d4c8b8;
+  --accent:#313814;
+  --mustard:#c7a84a;
 }
 
 *{box-sizing:border-box}
@@ -105,9 +107,17 @@ label{
   cursor:pointer;
 }
 
-.option:nth-of-type(1){border-left:5px solid #c9d7a5}
-.option:nth-of-type(2){border-left:5px solid #e7d98d}
-.option:nth-of-type(3){border-left:5px solid #6a4437}
+.option:nth-of-type(1){
+  border-left:5px solid #c9d7a5;
+}
+
+.option:nth-of-type(2){
+  border-left:5px solid #e7d98d;
+}
+
+.option:nth-of-type(3){
+  border-left:5px solid #6a4437;
+}
 
 .option input{
   width:auto;
@@ -144,6 +154,7 @@ label{
 select,
 input[type="text"],
 input[type="tel"],
+input[type="time"],
 textarea{
   width:100%;
   border:1px solid #d7cbbb;
@@ -151,7 +162,7 @@ textarea{
   padding:13px 14px;
   font:inherit;
   background:#fffdf7;
-  color:#7a3e49;
+  color:var(--ink);
 }
 
 .pills{
@@ -182,6 +193,10 @@ textarea{
   line-height:1.5;
 }
 
+#total::after{
+  content:"$6.00";
+}
+
 button{
   width:100%;
   border:1.5px solid #4b5a2a;
@@ -201,26 +216,79 @@ button:disabled{
   cursor:not-allowed;
 }
 
+/* Prices */
+
+#order:has(input[name="drink"][value="matcha"]:checked)
+:has(input[name="foam"][value="none"]:checked)
+#total::after{
+  content:"$6.00";
+}
+
+#order:has(input[name="drink"][value="matcha"]:checked)
+:has(input[name="foam"][value="regular"]:checked)
+#total::after{
+  content:"$6.75";
+}
+
+#order:has(input[name="drink"][value="matcha"]:checked)
+:has(input[name="foam"][value="matchafoam"]:checked)
+#total::after,
+#order:has(input[name="drink"][value="matcha"]:checked)
+:has(input[name="foam"][value="hojichafoam"]:checked)
+#total::after{
+  content:"$7.00";
+}
+
+#order:has(input[name="drink"][value="hojicha"]:checked)
+:has(input[name="foam"][value="none"]:checked)
+#total::after{
+  content:"$6.00";
+}
+
+#order:has(input[name="drink"][value="hojicha"]:checked)
+:has(input[name="foam"][value="regular"]:checked)
+#total::after{
+  content:"$6.75";
+}
+
+#order:has(input[name="drink"][value="hojicha"]:checked)
+:has(input[name="foam"][value="matchafoam"]:checked)
+#total::after,
+#order:has(input[name="drink"][value="hojicha"]:checked)
+:has(input[name="foam"][value="hojichafoam"]:checked)
+#total::after{
+  content:"$7.00";
+}
+
+#order:has(input[name="drink"][value="coldbrew"]:checked)
+:has(input[name="foam"][value="none"]:checked)
+#total::after{
+  content:"$3.00";
+}
+
+#order:has(input[name="drink"][value="coldbrew"]:checked)
+:has(input[name="foam"][value="regular"]:checked)
+#total::after{
+  content:"$3.75";
+}
+
+#order:has(input[name="drink"][value="coldbrew"]:checked)
+:has(input[name="foam"][value="matchafoam"]:checked)
+#total::after,
+#order:has(input[name="drink"][value="coldbrew"]:checked)
+:has(input[name="foam"][value="hojichafoam"]:checked)
+#total::after{
+  content:"$4.00";
+}
+
+/* Pink selection dots */
+
 input[type="radio"],
 input[type="checkbox"]{
   accent-color:#d7a6ae;
 }
 
-input[type="text"]::placeholder,
-input[type="tel"]::placeholder,
-textarea::placeholder{
-  color:#8a8075;
-  opacity:1;
-}
-
-input[type="text"]:focus,
-input[type="tel"]:focus,
-select:focus,
-textarea:focus{
-  outline:none;
-  border-color:#d7a6ae;
-  box-shadow:0 0 0 3px rgba(215,166,174,.28);
-}
+/* Delivery preferences */
 
 .delivery-prefs{
   gap:5px;
@@ -234,6 +302,8 @@ textarea:focus{
   margin:0;
 }
 
+/* Payment */
+
 .payment-methods{
   gap:6px;
 }
@@ -244,8 +314,13 @@ textarea:focus{
   margin:0;
 }
 
-#paymentSection #venmoPayment{display:block}
-#paymentSection #cashPayment{display:none}
+#paymentSection #venmoPayment{
+  display:block;
+}
+
+#paymentSection #cashPayment{
+  display:none;
+}
 
 #paymentSection:has(
   input[name="paymentMethod"][value="Cash at delivery"]:checked
@@ -259,26 +334,42 @@ textarea:focus{
   display:block;
 }
 
-#total::after{content:"$6.00"}
+/* Customer-entered text */
 
-#order:has(input[name="drink"][value="matcha"]:checked):has(input[name="foam"][value="none"]:checked) #total::after{content:"$6.00"}
-#order:has(input[name="drink"][value="matcha"]:checked):has(input[name="foam"][value="regular"]:checked) #total::after{content:"$6.75"}
-#order:has(input[name="drink"][value="matcha"]:checked):has(input[name="foam"][value="matchafoam"]:checked) #total::after{content:"$7.00"}
-#order:has(input[name="drink"][value="matcha"]:checked):has(input[name="foam"][value="hojichafoam"]:checked) #total::after{content:"$7.00"}
+input[type="text"],
+input[type="tel"],
+textarea{
+  color:#7a3e49;
+}
 
-#order:has(input[name="drink"][value="hojicha"]:checked):has(input[name="foam"][value="none"]:checked) #total::after{content:"$6.00"}
-#order:has(input[name="drink"][value="hojicha"]:checked):has(input[name="foam"][value="regular"]:checked) #total::after{content:"$6.75"}
-#order:has(input[name="drink"][value="hojicha"]:checked):has(input[name="foam"][value="matchafoam"]:checked) #total::after{content:"$7.00"}
-#order:has(input[name="drink"][value="hojicha"]:checked):has(input[name="foam"][value="hojichafoam"]:checked) #total::after{content:"$7.00"}
+input[type="text"]::placeholder,
+input[type="tel"]::placeholder,
+textarea::placeholder{
+  color:#8a8075;
+  opacity:1;
+}
 
-#order:has(input[name="drink"][value="coldbrew"]:checked):has(input[name="foam"][value="none"]:checked) #total::after{content:"$3.00"}
-#order:has(input[name="drink"][value="coldbrew"]:checked):has(input[name="foam"][value="regular"]:checked) #total::after{content:"$3.75"}
-#order:has(input[name="drink"][value="coldbrew"]:checked):has(input[name="foam"][value="matchafoam"]:checked) #total::after{content:"$4.00"}
-#order:has(input[name="drink"][value="coldbrew"]:checked):has(input[name="foam"][value="hojichafoam"]:checked) #total::after{content:"$4.00"}
+/* Pink active field */
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus{
+  outline:none;
+  border-color:#d7a6ae;
+  box-shadow:0 0 0 3px rgba(215,166,174,.28);
+}
 
 @media(max-width:390px){
-  .grid{grid-template-columns:1fr}
-  h1{font-size:36px}
+  .grid,
+  .pills{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:36px;
+  }
 }
 </style>
 </head>
@@ -287,65 +378,172 @@ textarea:focus{
 
 <div class="wrap">
 
+<!-- CLOSED BANNER -->
+
+<div
+  id="closedBanner"
+  style="
+    display:none;
+    margin:0 0 12px;
+    padding:12px 14px;
+    background:#7a3e49;
+    color:#fffaf0;
+    border:1px solid #62323b;
+    border-radius:7px;
+    text-align:center;
+    font:700 12px/1.4 'Baskerville','Times New Roman',serif;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  "
+>
+  Ordering is closed for this drop.
+</div>
+
+
+<!-- HEADER -->
+
 <header class="hero">
-  <div class="badge">Preorder form</div>
+
+  <div class="badge">
+    Preorder form
+  </div>
 
   <div style="display:inline-block;padding:14px 18px;">
+
     <h1 style="margin:0;font-size:38px;white-space:nowrap;">
       A.M. Drop Off
     </h1>
 
-    <div style="margin-top:12px;font-size:10px;letter-spacing:.22em;color:#6a4437;white-space:nowrap;">
+    <div
+      style="
+        margin-top:12px;
+        font-size:10px;
+        letter-spacing:.22em;
+        color:#6a4437;
+        white-space:nowrap;
+      "
+    >
       ◆ &nbsp;
-      <span id="serviceDateLabel">YOUR CUP FOR THE NEXT DROP</span>
+      <span id="serviceDateLabel">
+        YOUR CUP FOR THE NEXT DROP
+      </span>
       &nbsp; ◆
     </div>
+
   </div>
+
 </header>
 
 
 <form id="order">
 
+
+<!-- 1 DRINK -->
+
 <section class="card">
-  <div class="title">1 · Drink</div>
+
+  <div class="title">
+    1 · Drink
+  </div>
+
 
   <label class="option">
-    <span>
-      <input type="radio" name="drink" value="matcha" checked>
-      <span class="name">Iced Matcha Latte · 16 oz cup</span>
-      <div class="desc">Matcha + almond or oat milk</div>
-    </span>
-    <span class="price">$6</span>
-  </label>
 
-  <label class="option">
     <span>
-      <input type="radio" name="drink" value="hojicha">
-      <span class="name">Iced Hojicha Latte · 16 oz cup</span>
-      <div class="desc">Hojicha + almond or oat milk</div>
-    </span>
-    <span class="price">$6</span>
-  </label>
 
-  <label class="option">
-    <span>
-      <input type="radio" name="drink" value="coldbrew">
-      <span class="name">Cold Brew Cloud · 12 oz cup</span>
+      <input
+        type="radio"
+        name="drink"
+        value="matcha"
+        checked
+      >
+
+      <span class="name">
+        Iced Matcha Latte · 16 oz cup
+      </span>
+
       <div class="desc">
-        STōK cold brew topped with homemade hojicha or plain cold foam (add below)
+        Matcha + almond or oat milk
       </div>
+
     </span>
-    <span class="price">$3</span>
+
+    <span class="price">
+      $6
+    </span>
+
   </label>
+
+
+  <label class="option">
+
+    <span>
+
+      <input
+        type="radio"
+        name="drink"
+        value="hojicha"
+      >
+
+      <span class="name">
+        Iced Hojicha Latte · 16 oz cup
+      </span>
+
+      <div class="desc">
+        Hojicha + almond or oat milk
+      </div>
+
+    </span>
+
+    <span class="price">
+      $6
+    </span>
+
+  </label>
+
+
+  <label class="option">
+
+    <span>
+
+      <input
+        type="radio"
+        name="drink"
+        value="coldbrew"
+      >
+
+      <span class="name">
+        Cold Brew · 12 oz cup
+      </span>
+
+      <div class="desc">
+        Store-bought cold brew · please add hojicha or plain cold foam!
+      </div>
+
+    </span>
+
+    <span class="price">
+      $3
+    </span>
+
+  </label>
+
 </section>
 
 
+<!-- 2 CUSTOMIZE -->
+
 <section class="card">
-  <div class="title">2 · Customize</div>
+
+  <div class="title">
+    2 · Customize
+  </div>
+
 
   <div class="grid">
 
     <div class="field">
+
       <label for="milk">
         Milk
         <span style="font-weight:400;color:#8a8075">
@@ -354,116 +552,217 @@ textarea:focus{
       </label>
 
       <select id="milk" name="milk">
-        <option selected>Almond milk</option>
-        <option>Oat milk</option>
+
+        <option selected>
+          Almond milk
+        </option>
+
+        <option>
+          Oat milk
+        </option>
+
       </select>
+
     </div>
 
-    <div class="field">
-      <label for="sweetness">Sweetness</label>
 
-      <select id="sweetness" name="sweetness">
+    <div class="field">
+
+      <label for="sweetness">
+        Sweetness
+      </label>
+
+      <select
+        id="sweetness"
+        name="sweetness"
+      >
+
         <option>Regular</option>
         <option>Light</option>
         <option>Unsweetened</option>
         <option>Extra sweet</option>
+
       </select>
+
     </div>
 
   </div>
 
+
   <div class="field">
-    <label>Cold foam</label>
+    <label>
+      Cold foam
+    </label>
   </div>
+
 
   <div class="pills">
 
     <label class="pill">
-      <input type="radio" name="foam" value="none" checked>
+
+      <input
+        type="radio"
+        name="foam"
+        value="none"
+        checked
+      >
+
       No cold foam
+
     </label>
 
+
     <label class="pill">
-      <input type="radio" name="foam" value="regular">
+
+      <input
+        type="radio"
+        name="foam"
+        value="regular"
+      >
+
       Plain +$0.75
+
     </label>
 
+
     <label class="pill">
-      <input type="radio" name="foam" value="matchafoam">
+
+      <input
+        type="radio"
+        name="foam"
+        value="matchafoam"
+      >
+
       Matcha +$1.00
+
     </label>
 
+
     <label class="pill">
-      <input type="radio" name="foam" value="hojichafoam">
+
+      <input
+        type="radio"
+        name="foam"
+        value="hojichafoam"
+      >
+
       Hojicha +$1.00
+
     </label>
 
   </div>
 
+
   <p class="note">
-    <strong>Contains dairy:</strong>
+
+    <strong>
+      Contains dairy:
+    </strong>
+
     all cold foam options are made with dairy (heavy cream).
+
   </p>
 
 </section>
 
 
+<!-- 3 DELIVERY -->
+
 <section class="card">
-  <div class="title">3 · Delivery Details</div>
+
+  <div class="title">
+    3 · Delivery Details
+  </div>
+
 
   <p class="note">
+
     I’ll drop your drink off at your unit during your selected
     30-minute window.
+
     <strong>
       Each 30-minute window is limited to 2 deliveries total.
     </strong>
+
   </p>
 
+
   <div class="field">
-    <label>Name</label>
+
+    <label>
+      Name
+    </label>
+
     <input
       id="customerName"
+      name="name"
       type="text"
       placeholder="Your name"
       required
     >
+
   </div>
 
+
   <div class="field">
-    <label>Apartment / unit</label>
+
+    <label>
+      Apartment / unit
+    </label>
+
     <input
       id="unit"
+      name="unit"
       type="text"
       placeholder="e.g. 8B"
       required
     >
+
   </div>
 
-  <div class="field">
-    <label>Phone #</label>
 
-    <div style="display:grid;grid-template-columns:120px 1fr;gap:11px;">
+  <div class="field">
+
+    <label>
+      Phone #
+    </label>
+
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:120px 1fr;
+        gap:11px;
+      "
+    >
 
       <input
         id="areaCode"
+        name="areaCode"
         type="tel"
         inputmode="numeric"
         maxlength="3"
         pattern="[0-9]{3}"
         placeholder="Area code"
+        aria-label="Area code"
         required
       >
 
+
       <input
         id="phone"
+        name="phone"
         type="tel"
         inputmode="numeric"
         placeholder="555-1234"
+        aria-label="Phone number"
         required
       >
 
     </div>
+
   </div>
+
 
   <div class="field">
 
@@ -471,12 +770,18 @@ textarea:focus{
       Delivery window
     </label>
 
+
     <select
       id="deliveryWindow"
+      name="deliveryWindow"
       required
     >
 
-      <option value="" selected disabled>
+      <option
+        value=""
+        selected
+        disabled
+      >
         Select a 30-minute window
       </option>
 
@@ -510,6 +815,7 @@ textarea:focus{
 
     </select>
 
+
     <div
       id="availabilityStatus"
       class="note"
@@ -521,89 +827,130 @@ textarea:focus{
 </section>
 
 
+<!-- 4 CONTACT -->
+
 <section class="card">
 
   <div class="title">
     4 · Contact &amp; Drop-off
   </div>
 
+
   <div class="field">
 
-    <p class="note" style="margin:1px 0 6px;">
+    <p
+      class="note"
+      style="margin:1px 0 6px;"
+    >
       Check all that apply.
     </p>
 
+
     <div class="pills delivery-prefs">
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="Text"
         >
+
         Text
+
       </label>
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="WhatsApp DM"
         >
+
         WhatsApp DM
+
       </label>
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="Call"
         >
+
         Call
+
       </label>
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="Knock"
         >
+
         Knock
+
       </label>
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="Hand to me"
         >
+
         Hand to me
+
       </label>
 
+
       <label class="pill">
+
         <input
           type="checkbox"
           name="deliveryPreference"
           value="Leave at door"
         >
+
         Leave at door
+
       </label>
 
     </div>
 
+
     <p class="note">
-      <strong>First orders:</strong>
+
+      <strong>
+        First orders:
+      </strong>
+
       I’ll hand your drink to you in person.
+
     </p>
 
   </div>
 
+
   <div class="field">
 
-    <label>Notes</label>
+    <label>
+      Notes
+    </label>
 
     <textarea
       id="notes"
+      name="notes"
       rows="3"
       placeholder="Anything you’d like me to know?"
     ></textarea>
@@ -613,18 +960,31 @@ textarea:focus{
 </section>
 
 
+<!-- 5 TOTAL -->
+
 <section
   class="card"
-  style="max-width:360px;margin:0 auto 14px;padding:18px;"
+  style="
+    max-width:360px;
+    margin:0 auto 14px;
+    padding:18px;
+  "
 >
 
-  <div class="title">5 · Total</div>
+  <div class="title">
+    5 · Total
+  </div>
+
 
   <div style="padding:4px 0;">
 
     <div
       id="total"
-      style="color:var(--ink);font:700 30px Georgia,serif;line-height:1;"
+      style="
+        color:var(--ink);
+        font:700 30px Georgia,serif;
+        line-height:1;
+      "
     ></div>
 
   </div>
@@ -632,11 +992,22 @@ textarea:focus{
 
   <div id="paymentSection">
 
-    <div class="field" style="margin-top:14px;">
 
-      <label>Payment method</label>
+    <div
+      class="field"
+      style="margin-top:14px;"
+    >
 
-      <div class="pills payment-methods">
+      <label>
+        Payment method
+      </label>
+
+
+      <div
+        class="pills payment-methods"
+        style="margin-top:6px;"
+      >
+
 
         <label class="pill">
 
@@ -650,6 +1021,7 @@ textarea:focus{
           Venmo
 
         </label>
+
 
         <label class="pill">
 
@@ -670,7 +1042,11 @@ textarea:focus{
 
     <div id="venmoPayment">
 
-      <div class="field" style="margin-top:14px">
+
+      <div
+        class="field"
+        style="margin-top:14px"
+      >
 
         <a
           href="https://venmo.com/u/anvytvu"
@@ -692,10 +1068,13 @@ textarea:focus{
 
       </div>
 
+
       <p class="note">
+
         Tap “Pay with Venmo” to open my Venmo directly.
         Please send the total first, then return here and
         press “Place my order” to submit your order form.
+
       </p>
 
     </div>
@@ -706,7 +1085,9 @@ textarea:focus{
       class="note"
       style="margin-top:12px;"
     >
+
       Please have cash ready when I drop off your drink.
+
     </div>
 
   </div>
@@ -723,7 +1104,10 @@ textarea:focus{
   <div
     id="submitStatus"
     class="note"
-    style="margin-top:10px;text-align:center;"
+    style="
+      margin-top:10px;
+      text-align:center;
+    "
   ></div>
 
 </section>
@@ -731,35 +1115,51 @@ textarea:focus{
 </form>
 
 
+<!-- Q&A -->
+
 <section class="card">
 
-  <div class="title">Q&amp;A</div>
+  <div class="title">
+    Q&amp;A
+  </div>
 
 
   <p>
-    <strong>Who are you?</strong>
+    <strong>
+      Who are you?
+    </strong>
   </p>
 
+
   <p class="note">
-    My name is Anvy— your neighbor in 5D! I’ve lived in the
-    building for almost six years with my husband, Mark, and
-    our dog, Maxx. Most recently, we welcomed our baby, Avyn,
-    to the family!
+
+    My name is Anvy— your neighbor in 5D!
+    I’ve lived in the building for almost six years
+    with my husband, Mark, and our dog, Maxx.
+    Most recently, we welcomed our baby, Avyn, to the family!
+
   </p>
 
 
   <p>
-    <strong>Why are you doing this?</strong>
+    <strong>
+      Why are you doing this?
+    </strong>
   </p>
 
+
   <p class="note">
+
     I’m on maternity leave and developed a love for hand
-    whisking lattes with high-quality ingredients. I enjoy
-    making them exactly how I like them, especially while
-    being mindful of caffeine during breastfeeding. Now I
-    want to turn this little morning ritual into a mini side
-    quest—something creative that’s just for me outside of
-    full-time stay-at-home mom life.
+    whisking lattes with high-quality ingredients.
+    I enjoy making them exactly how I like them,
+    especially while being mindful of caffeine during
+    breastfeeding.
+
+    Now I want to turn this little morning ritual into a
+    mini side quest—something creative that’s just for me
+    outside of full-time stay-at-home mom life.
+
   </p>
 
 
@@ -768,6 +1168,7 @@ textarea:focus{
       What are the drinks sweetened with?
     </strong>
   </p>
+
 
   <p class="note">
     All drinks are sweetened with maple syrup.
@@ -780,21 +1181,27 @@ textarea:focus{
     </strong>
   </p>
 
+
   <p class="note">
-    The matcha and hojicha are organic and from a farm in
-    the countryside of Kyoto, Japan, which I personally
-    visited and took a class at last year! All other
-    ingredients are from Whole Foods, and the ice is from
-    Target.
+
+    The matcha and hojicha are organic and from a farm
+    in the countryside of Kyoto, Japan, which I personally
+    visited and took a class at last year!
+
+    All other ingredients are from Whole Foods,
+    and the ice is from Target.
+
   </p>
 
 
-  <div style="
-    margin-top:18px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  ">
+  <div
+    style="
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    "
+  >
 
     <img
       src="kyoto-farm-1.png"
@@ -807,6 +1214,7 @@ textarea:focus{
         object-fit:cover;
       "
     >
+
 
     <img
       src="kyoto-farm-2.png"
@@ -854,32 +1262,52 @@ textarea:focus{
 
 
   const drinkNames = {
-    matcha:"Iced Matcha Latte · 16 oz cup",
-    hojicha:"Iced Hojicha Latte · 16 oz cup",
-    coldbrew:"Cold Brew · 12 oz cup"
+
+    matcha:
+      "Iced Matcha Latte · 16 oz cup",
+
+    hojicha:
+      "Iced Hojicha Latte · 16 oz cup",
+
+    coldbrew:
+      "Cold Brew · 12 oz cup"
+
   };
 
 
   const drinkPrices = {
+
     matcha:6,
     hojicha:6,
     coldbrew:3
+
   };
 
 
   const foamNames = {
-    none:"No cold foam",
-    regular:"Plain cold foam",
-    matchafoam:"Matcha cold foam",
-    hojichafoam:"Hojicha cold foam"
+
+    none:
+      "No cold foam",
+
+    regular:
+      "Plain cold foam",
+
+    matchafoam:
+      "Matcha cold foam",
+
+    hojichafoam:
+      "Hojicha cold foam"
+
   };
 
 
   const foamPrices = {
+
     none:0,
     regular:.75,
     matchafoam:1,
     hojichafoam:1
+
   };
 
 
@@ -893,6 +1321,7 @@ textarea:focus{
       );
 
     return el ? el.value : "";
+
   }
 
 
@@ -908,6 +1337,7 @@ textarea:focus{
       (drinkPrices[drink] || 0) +
       (foamPrices[foam] || 0)
     );
+
   }
 
 
@@ -916,7 +1346,9 @@ textarea:focus{
     availabilityStatus.textContent =
       "Checking delivery windows…";
 
+
     try{
+
 
       const response =
         await fetch(
@@ -924,6 +1356,7 @@ textarea:focus{
           "?action=availability&ts=" +
           Date.now()
         );
+
 
       const data =
         await response.json();
@@ -935,8 +1368,11 @@ textarea:focus{
           data.message ||
           "Could not load availability"
         );
+
       }
 
+
+      /* DATE */
 
       if(data.serviceDate){
 
@@ -944,6 +1380,7 @@ textarea:focus{
           document.getElementById(
             "serviceDateLabel"
           );
+
 
         if(label){
 
@@ -959,6 +1396,7 @@ textarea:focus{
           const day =
             Number(parts[2]);
 
+
           const date =
             new Date(
               year,
@@ -966,13 +1404,17 @@ textarea:focus{
               day
             );
 
+
           const weekday =
             date
               .toLocaleDateString(
                 "en-US",
-                {weekday:"short"}
+                {
+                  weekday:"short"
+                }
               )
               .toUpperCase();
+
 
           label.textContent =
             "YOUR CUP FOR " +
@@ -981,19 +1423,58 @@ textarea:focus{
             month +
             "/" +
             day;
+
         }
+
       }
 
+
+      /* WHOLE FORM STATUS */
 
       const isClosed =
         String(
           data.orderingStatus || ""
-        ).toLowerCase() === "closed";
+        ).toLowerCase() ===
+        "closed";
 
+
+      /* TOP CLOSED BANNER */
+
+      const closedBanner =
+        document.getElementById(
+          "closedBanner"
+        );
+
+
+      if(closedBanner){
+
+        if(isClosed){
+
+          closedBanner.textContent =
+            data.closedMessage ||
+            "Ordering is closed for this drop.";
+
+          closedBanner.style.display =
+            "block";
+
+        }else{
+
+          closedBanner.style.display =
+            "none";
+
+        }
+
+      }
+
+
+      /* INDIVIDUAL WINDOWS */
 
       Array
-        .from(deliverySelect.options)
+        .from(
+          deliverySelect.options
+        )
         .forEach(option=>{
+
 
           if(!option.value){
             return;
@@ -1017,10 +1498,13 @@ textarea:focus{
 
 
           const manuallyClosed =
-            slotStatus === "closed";
+            slotStatus ===
+            "closed";
+
 
           const full =
-            count >= MAX_PER_SLOT;
+            count >=
+            MAX_PER_SLOT;
 
 
           option.disabled =
@@ -1045,48 +1529,67 @@ textarea:focus{
 
             option.textContent =
               option.value;
+
           }
 
         });
 
 
+      /* WHOLE FORM CLOSED */
+
       if(isClosed){
 
-        deliverySelect.disabled = true;
+        deliverySelect.disabled =
+          true;
 
-        submitButton.disabled = true;
+        submitButton.disabled =
+          true;
 
         submitButton.textContent =
           "Ordering closed";
+
 
         availabilityStatus.textContent =
           data.closedMessage ||
           "Ordering is closed for this service date.";
 
-        submitStatus.textContent = "";
+
+        submitStatus.textContent =
+          "";
+
 
       }else{
 
-        deliverySelect.disabled = false;
 
-        submitButton.disabled = false;
+        deliverySelect.disabled =
+          false;
+
+        submitButton.disabled =
+          false;
 
         submitButton.textContent =
           "Place my order 🍵";
 
+
         availabilityStatus.textContent =
           "Unavailable windows will show as CLOSED or FULL.";
+
       }
 
 
     }catch(error){
 
+
       availabilityStatus.textContent =
         "Availability could not be refreshed. Final availability is confirmed when you submit.";
+
+
     }
 
   }
 
+
+  /* PAYMENT UI */
 
   function updatePaymentUI(){
 
@@ -1136,9 +1639,12 @@ textarea:focus{
   updatePaymentUI();
 
 
+  /* SUBMIT */
+
   form.addEventListener(
     "submit",
     async function(event){
+
 
       event.preventDefault();
 
@@ -1149,15 +1655,22 @@ textarea:focus{
 
 
       const drinkKey =
-        checkedValue("drink");
+        checkedValue(
+          "drink"
+        );
+
 
       const foamKey =
-        checkedValue("foam");
+        checkedValue(
+          "foam"
+        );
 
 
       const payload = {
 
+
         name:
+
           document
             .getElementById(
               "customerName"
@@ -1165,7 +1678,9 @@ textarea:focus{
             .value
             .trim(),
 
+
         unit:
+
           document
             .getElementById(
               "unit"
@@ -1173,7 +1688,9 @@ textarea:focus{
             .value
             .trim(),
 
+
         areaCode:
+
           document
             .getElementById(
               "areaCode"
@@ -1181,7 +1698,9 @@ textarea:focus{
             .value
             .trim(),
 
+
         phone:
+
           document
             .getElementById(
               "phone"
@@ -1189,46 +1708,63 @@ textarea:focus{
             .value
             .trim(),
 
+
         drink:
+
           drinkNames[
             drinkKey
           ],
 
+
         milk:
+
           document
             .getElementById(
               "milk"
             )
             .value,
 
+
         sweetness:
+
           document
             .getElementById(
               "sweetness"
             )
             .value,
 
+
         foam:
+
           foamNames[
             foamKey
           ],
 
+
         deliveryWindow:
+
           deliverySelect.value,
 
+
         deliveryPreferences:
+
           Array.from(
-            document
-              .querySelectorAll(
-                'input[name="deliveryPreference"]:checked'
-              )
+
+            document.querySelectorAll(
+              'input[name="deliveryPreference"]:checked'
+            )
+
           )
+
           .map(
             el=>el.value
           )
+
           .join(", "),
 
+
         notes:
+
           document
             .getElementById(
               "notes"
@@ -1236,12 +1772,16 @@ textarea:focus{
             .value
             .trim(),
 
+
         paymentMethod:
+
           checkedValue(
             "paymentMethod"
           ),
 
+
         total:
+
           "$" +
           calculateTotal()
             .toFixed(2)
@@ -1249,30 +1789,44 @@ textarea:focus{
       };
 
 
-      submitButton.disabled = true;
+      submitButton.disabled =
+        true;
+
 
       submitButton.textContent =
         "Submitting…";
 
-      submitStatus.textContent = "";
+
+      submitStatus.textContent =
+        "";
 
 
       try{
 
+
         const response =
           await fetch(
+
             SCRIPT_URL,
+
             {
+
               method:"POST",
+
               headers:{
+
                 "Content-Type":
                   "text/plain;charset=utf-8"
+
               },
+
               body:
                 JSON.stringify(
                   payload
                 )
+
             }
+
           );
 
 
@@ -1282,77 +1836,101 @@ textarea:focus{
 
         if(!data.success){
 
+
           if(
             data.code ===
             "SLOT_FULL"
           ){
 
+
             submitStatus.textContent =
               "Sorry — that delivery window just filled up. Please choose another time.";
 
+
             await loadAvailability();
+
 
           }else if(
             data.code ===
             "SLOT_CLOSED"
           ){
 
+
             submitStatus.textContent =
               "That delivery window is closed. Please choose another time.";
 
+
             await loadAvailability();
+
 
           }else if(
             data.code ===
             "ORDERING_CLOSED"
           ){
 
+
             submitStatus.textContent =
               data.message ||
               "Ordering is closed for this service date.";
 
+
             await loadAvailability();
 
+
           }else{
+
 
             submitStatus.textContent =
               data.message ||
               "Your order didn’t submit. Please try again.";
+
+
           }
 
 
           submitButton.disabled =
             false;
 
+
           submitButton.textContent =
             "Place my order 🍵";
 
+
           return;
+
         }
 
 
         submitStatus.textContent =
-          "Order submitted! I’ll see you during your delivery window :)";
+          "Order submitted! I’ll see you during your delivery window.";
+
 
         submitButton.textContent =
           "Order submitted ✓";
+
 
         await loadAvailability();
 
 
       }catch(error){
 
+
         submitStatus.textContent =
           "Your order didn’t submit. Please try again.";
+
 
         submitButton.disabled =
           false;
 
+
         submitButton.textContent =
           "Place my order 🍵";
+
+
       }
 
     }
+
   );
 
 
