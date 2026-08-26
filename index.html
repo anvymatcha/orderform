@@ -218,68 +218,6 @@ button:disabled{
 
 /* Prices */
 
-#order:has(input[name="drink"][value="matcha"]:checked)
-:has(input[name="foam"][value="none"]:checked)
-#total::after{
-  content:"$6.00";
-}
-
-#order:has(input[name="drink"][value="matcha"]:checked)
-:has(input[name="foam"][value="regular"]:checked)
-#total::after{
-  content:"$6.75";
-}
-
-#order:has(input[name="drink"][value="matcha"]:checked)
-:has(input[name="foam"][value="matchafoam"]:checked)
-#total::after,
-#order:has(input[name="drink"][value="matcha"]:checked)
-:has(input[name="foam"][value="hojichafoam"]:checked)
-#total::after{
-  content:"$7.00";
-}
-
-#order:has(input[name="drink"][value="hojicha"]:checked)
-:has(input[name="foam"][value="none"]:checked)
-#total::after{
-  content:"$6.00";
-}
-
-#order:has(input[name="drink"][value="hojicha"]:checked)
-:has(input[name="foam"][value="regular"]:checked)
-#total::after{
-  content:"$6.75";
-}
-
-#order:has(input[name="drink"][value="hojicha"]:checked)
-:has(input[name="foam"][value="matchafoam"]:checked)
-#total::after,
-#order:has(input[name="drink"][value="hojicha"]:checked)
-:has(input[name="foam"][value="hojichafoam"]:checked)
-#total::after{
-  content:"$7.00";
-}
-
-#order:has(input[name="drink"][value="coldbrew"]:checked)
-:has(input[name="foam"][value="none"]:checked)
-#total::after{
-  content:"$3.00";
-}
-
-#order:has(input[name="drink"][value="coldbrew"]:checked)
-:has(input[name="foam"][value="regular"]:checked)
-#total::after{
-  content:"$3.75";
-}
-
-#order:has(input[name="drink"][value="coldbrew"]:checked)
-:has(input[name="foam"][value="matchafoam"]:checked)
-#total::after,
-#order:has(input[name="drink"][value="coldbrew"]:checked)
-:has(input[name="foam"][value="hojichafoam"]:checked)
-#total::after{
-  content:"$4.00";
-}
 
 /* Pink selection dots */
 
@@ -1366,7 +1304,33 @@ textarea:focus{
 
   }
 
+function updateTotalDisplay() {
 
+  const total = calculateTotal();
+
+  document
+    .getElementById("total")
+    .textContent =
+      "$" + total.toFixed(2);
+}
+
+
+document
+  .querySelectorAll(
+    'input[name="drink"], input[name="foam"]'
+  )
+  .forEach(el => {
+
+    el.addEventListener(
+      "change",
+      updateTotalDisplay
+    );
+
+  });
+
+
+updateTotalDisplay();
+  
   async function loadAvailability(){
 
     availabilityStatus.textContent =
